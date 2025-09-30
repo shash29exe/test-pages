@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>404</h1>
+      <h2>NOT FOUND</h2>
+      <p><a onclick="goBack()">Back</a></p>
+    </div>
+
+    <noscript>You must enable JavaScript to see this text.</noscript>
+
+    <div class="snowflakes fade-in">
+      <div class="snowflake">&#10015;</div>
+      <div class="snowflake">&#10014;</div>
+      <div class="snowflake">&#10015;</div>
+      <div class="snowflake">&#10014;</div>
+      <div class="snowflake">&#10015;</div>
+      <div class="snowflake">&#10014;</div>
+      <div class="snowflake">&#10015;</div>
+      <div class="snowflake">&#10014;</div>
+      <div class="snowflake">&#10015;</div>
+      <div class="snowflake">&#10014;</div>
+      <div class="snowflake">&#10015;</div>
+    </div>
+    
+    <script>
+      var titles = [".", "4", "40", "404", "40", "4"];
+      var currentTitleIndex = 0;
+      function changeTitle() {
+        document.title = titles[currentTitleIndex];
+        currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+      }
+      setInterval(changeTitle, 300);
+
+      function goBack() {
+        window.history.back();
+      }
+    </script>
+  </body>
+</html>
