@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test pages</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Test pages</h1>
+    <ul id="dirs"></ul>
+
+    <script>
+        fetch(`https://api.github.com/repos/shash29exe/test-pages/contents/`)
+        .then(res => res.json())
+        .then(async data => {
+            const list = document.getElementById("dirs");
+            const dirs = data.filter(item => item.type === "dir");
+
+            for (const dir of dirs) {
+                const commitsUrl = `https://api.github.com/repos/shash29exe/test-pages/commits?path=${dir.path}`;
+                const commitRes = await fetch(commitsUrl);
+                const commitData = await commitRes.json();
+
+                const date = commitData[0] ? new String(commitData[0].commit.message).toLocaleString() : "нет данных";
+
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <a href="${dir.path}/">${dir.name}</a>
+                    <span style="color: gray; font-size: 0.9em;">
+                        - ${date}
+                    </span>
+                `;
+                list.appendChild(li);
+            }
+        })
+        .catch(err => console.error(err));
+    </script>
+</body>
+</html>
